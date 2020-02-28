@@ -1,0 +1,4 @@
+main: de.linzn.telegramConnector.TelegramConnectorPlugin
+name: telegram-connector
+version: ${project.version}
+depend: []
