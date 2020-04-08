@@ -12,12 +12,13 @@
 package de.linzn.telegramConnector;
 
 
-import de.azcore.azcoreRuntime.AZCoreRuntimeApp;
-import de.azcore.azcoreRuntime.modules.pluginModule.AZPlugin;
+
 import de.linzn.telegramConnector.data.TelegramProfile;
+import de.stem.stemSystem.STEMSystemApp;
+import de.stem.stemSystem.modules.pluginModule.STEMPlugin;
 
 
-public class TelegramConnectorPlugin extends AZPlugin {
+public class TelegramConnectorPlugin extends STEMPlugin {
 
     public static TelegramConnectorPlugin telegramConnectorPlugin;
 
@@ -28,7 +29,7 @@ public class TelegramConnectorPlugin extends AZPlugin {
 
     @Override
     public void onEnable() {
-        AZCoreRuntimeApp.getInstance().getNotificationModule().registerNotificationProfile(new TelegramProfile());
+        STEMSystemApp.getInstance().getNotificationModule().registerNotificationProfile(new TelegramProfile());
     }
 
     @Override

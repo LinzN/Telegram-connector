@@ -12,12 +12,13 @@
 package de.linzn.telegramConnector.data;
 
 
-import de.azcore.azcoreRuntime.AppLogger;
-import de.azcore.azcoreRuntime.modules.notificationModule.INotificationProfile;
-import de.azcore.azcoreRuntime.modules.notificationModule.NotificationContainer;
-import de.azcore.azcoreRuntime.modules.notificationModule.NotificationPriority;
+
 import de.linzn.telegramConnector.TelegramConnectorPlugin;
 import de.linzn.telegramapi.TelegramAPI;
+import de.stem.stemSystem.AppLogger;
+import de.stem.stemSystem.modules.notificationModule.INotificationProfile;
+import de.stem.stemSystem.modules.notificationModule.NotificationContainer;
+import de.stem.stemSystem.modules.notificationModule.NotificationPriority;
 
 public class TelegramProfile implements INotificationProfile {
     private String chatID;
