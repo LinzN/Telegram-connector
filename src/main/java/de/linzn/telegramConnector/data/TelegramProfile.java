@@ -15,7 +15,7 @@ package de.linzn.telegramConnector.data;
 
 import de.linzn.telegramConnector.TelegramConnectorPlugin;
 import de.linzn.telegramapi.TelegramAPI;
-import de.stem.stemSystem.AppLogger;
+import de.stem.stemSystem.STEMSystemApp;
 import de.stem.stemSystem.modules.notificationModule.INotificationProfile;
 import de.stem.stemSystem.modules.notificationModule.NotificationContainer;
 import de.stem.stemSystem.modules.notificationModule.NotificationPriority;
@@ -33,7 +33,7 @@ public class TelegramProfile implements INotificationProfile {
     @Override
     public void push(NotificationContainer notificationContainer) {
         if (notificationContainer.notificationPriority.hasPriority(NotificationPriority.DEFAULT)) {
-            AppLogger.debug("Telegram to chatId: " + chatID);
+            STEMSystemApp.LOGGER.DEBUG("Telegram to chatId: " + chatID);
             TelegramAPI telegramAPI = new TelegramAPI(token);
             System.out.println(telegramAPI.sendMessage(chatID, notificationContainer.notification).getResponse());
         }
