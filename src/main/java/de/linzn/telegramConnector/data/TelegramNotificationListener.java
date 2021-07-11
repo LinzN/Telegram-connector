@@ -33,9 +33,9 @@ public class TelegramNotificationListener {
     @StemEventHandler()
     public void onNotification(NotificationEvent notificationEvent){
         if (notificationEvent.getNotificationPriority().hasPriority(NotificationPriority.DEFAULT)) {
-            STEMSystemApp.LOGGER.DEBUG("Telegram to chatId: " + chatID);
+            STEMSystemApp.LOGGER.INFO("Send telegram info with chatId: " + chatID);
             TelegramAPI telegramAPI = new TelegramAPI(token);
-            System.out.println(telegramAPI.sendMessage(chatID, notificationEvent.getNotification()).getResponse());
+            telegramAPI.sendMessage(chatID, notificationEvent.getNotification()).getResponse();
         }
     }
 }
