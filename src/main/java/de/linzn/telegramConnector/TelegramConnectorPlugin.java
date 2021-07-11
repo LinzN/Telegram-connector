@@ -13,7 +13,7 @@ package de.linzn.telegramConnector;
 
 
 
-import de.linzn.telegramConnector.data.TelegramProfile;
+import de.linzn.telegramConnector.data.TelegramNotificationListener;
 import de.stem.stemSystem.STEMSystemApp;
 import de.stem.stemSystem.modules.pluginModule.STEMPlugin;
 
@@ -29,7 +29,7 @@ public class TelegramConnectorPlugin extends STEMPlugin {
 
     @Override
     public void onEnable() {
-        STEMSystemApp.getInstance().getNotificationModule().registerNotificationProfile(new TelegramProfile());
+        STEMSystemApp.getInstance().getEventModule().getStemEventBus().register(new TelegramNotificationListener());
     }
 
     @Override

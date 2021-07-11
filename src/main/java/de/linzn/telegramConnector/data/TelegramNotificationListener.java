@@ -16,26 +16,26 @@ package de.linzn.telegramConnector.data;
 import de.linzn.telegramConnector.TelegramConnectorPlugin;
 import de.linzn.telegramapi.TelegramAPI;
 import de.stem.stemSystem.STEMSystemApp;
-import de.stem.stemSystem.modules.notificationModule.INotificationProfile;
-import de.stem.stemSystem.modules.notificationModule.NotificationContainer;
+import de.stem.stemSystem.modules.eventModule.handler.StemEventHandler;
 import de.stem.stemSystem.modules.notificationModule.NotificationPriority;
+import de.stem.stemSystem.modules.notificationModule.events.NotificationEvent;
 
-public class TelegramProfile implements INotificationProfile {
+public class TelegramNotificationListener {
     private String chatID;
     private String token;
 
-    public TelegramProfile() {
+    public TelegramNotificationListener() {
         this.chatID = TelegramConnectorPlugin.telegramConnectorPlugin.getDefaultConfig().getString("defaultChatID", "-100000");
         this.token = TelegramConnectorPlugin.telegramConnectorPlugin.getDefaultConfig().getString("token", "xxxxxxxx:xxxxxxxxxxxxxxxxx");
         TelegramConnectorPlugin.telegramConnectorPlugin.getDefaultConfig().save();
     }
 
-    @Override
-    public void push(NotificationContainer notificationContainer) {
-        if (notificationContainer.notificationPriority.hasPriority(NotificationPriority.DEFAULT)) {
+    @StemEventHandler()
+    public void onNotification(NotificationEvent notificationEvent){
+        if (notificationEvent.getNotificationPriority().hasPriority(NotificationPriority.DEFAULT)) {
             STEMSystemApp.LOGGER.DEBUG("Telegram to chatId: " + chatID);
             TelegramAPI telegramAPI = new TelegramAPI(token);
-            System.out.println(telegramAPI.sendMessage(chatID, notificationContainer.notification).getResponse());
+            System.out.println(telegramAPI.sendMessage(chatID, notificationEvent.getNotification()).getResponse());
         }
     }
 }
