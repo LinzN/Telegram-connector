@@ -17,6 +17,7 @@ import de.linzn.telegramapi.TelegramAPI;
 import de.stem.stemSystem.STEMSystemApp;
 import de.stem.stemSystem.modules.eventModule.handler.StemEventHandler;
 import de.stem.stemSystem.modules.informationModule.InformationBlock;
+import de.stem.stemSystem.modules.informationModule.InformationIntent;
 import de.stem.stemSystem.modules.informationModule.events.InformationEvent;
 import de.stem.stemSystem.modules.notificationModule.NotificationPriority;
 import de.stem.stemSystem.modules.notificationModule.events.NotificationEvent;
@@ -43,10 +44,14 @@ public class TelegramNotificationListener {
     @StemEventHandler()
     public void inInformationEvent(InformationEvent informationEvent) {
         InformationBlock informationBlock = informationEvent.getInformationBlock();
-        if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("system-chain")) {
+        if(informationBlock.hasIntent(InformationIntent.NOTIFY_USER)){
             sendInformationBlock(informationBlock);
-        } else if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("home-devices")) {
-            sendInformationBlock(informationBlock);
+        } else {
+            if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("system-chain")) {
+                sendInformationBlock(informationBlock);
+            } else if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("home-devices")) {
+                sendInformationBlock(informationBlock);
+            }
         }
     }
 
