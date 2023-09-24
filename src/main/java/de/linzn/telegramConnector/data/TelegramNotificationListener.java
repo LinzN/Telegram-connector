@@ -56,8 +56,8 @@ public class TelegramNotificationListener {
     }
 
     private void sendInformationBlock(InformationBlock informationBlock) {
-        STEMSystemApp.LOGGER.INFO("Listen to InformationEvent and forward to telegram: " + chatID);
+        STEMSystemApp.LOGGER.DEBUG("Listen to InformationEvent and forward to telegram: " + chatID);
         TelegramAPI telegramAPI = new TelegramAPI(token);
-        telegramAPI.sendMessage(chatID, informationBlock.getDescription());
+        telegramAPI.sendMessage(chatID, informationBlock.getLongDescription());
     }
 }
