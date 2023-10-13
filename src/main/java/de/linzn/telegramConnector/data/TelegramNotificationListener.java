@@ -45,19 +45,9 @@ public class TelegramNotificationListener {
     public void inInformationEvent(InformationEvent informationEvent) {
         InformationBlock informationBlock = informationEvent.getInformationBlock();
         if(informationBlock.hasIntent(InformationIntent.NOTIFY_USER)){
-            sendInformationBlock(informationBlock);
-        } else {
-            if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("system-chain")) {
-                sendInformationBlock(informationBlock);
-            } else if (informationBlock.getSourcePlugin().getPluginName().equalsIgnoreCase("home-devices")) {
-                sendInformationBlock(informationBlock);
-            }
+            STEMSystemApp.LOGGER.DEBUG("Listen to InformationEvent and forward to telegram: " + chatID);
+            TelegramAPI telegramAPI = new TelegramAPI(token);
+            telegramAPI.sendMessage(chatID, informationBlock.getLongDescription());
         }
-    }
-
-    private void sendInformationBlock(InformationBlock informationBlock) {
-        STEMSystemApp.LOGGER.DEBUG("Listen to InformationEvent and forward to telegram: " + chatID);
-        TelegramAPI telegramAPI = new TelegramAPI(token);
-        telegramAPI.sendMessage(chatID, informationBlock.getLongDescription());
     }
 }
